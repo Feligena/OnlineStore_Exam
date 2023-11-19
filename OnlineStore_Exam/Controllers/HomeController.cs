@@ -6,11 +6,11 @@ namespace OnlineStore_Exam.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly OnlineStoreDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(OnlineStoreDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
