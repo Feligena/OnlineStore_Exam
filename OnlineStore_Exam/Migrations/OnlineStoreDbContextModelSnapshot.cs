@@ -29,9 +29,6 @@ namespace OnlineStore_Exam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryImageId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -40,8 +37,6 @@ namespace OnlineStore_Exam.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryImageId");
 
                     b.ToTable("Categories");
                 });
@@ -54,13 +49,12 @@ namespace OnlineStore_Exam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("Data")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -74,13 +68,12 @@ namespace OnlineStore_Exam.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId")
+                        .IsUnique();
+
                     b.HasIndex("ProductId");
 
                     b.ToTable("Images");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Images");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("OnlineStore_Exam.Models.Product", b =>
@@ -166,31 +159,21 @@ namespace OnlineStore_Exam.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("OnlineStore_Exam.Models.CategoryImage", b =>
-                {
-                    b.HasBaseType("OnlineStore_Exam.Models.Images");
-
-                    b.HasDiscriminator().HasValue("CategoryImage");
-                });
-
-            modelBuilder.Entity("OnlineStore_Exam.Models.Category", b =>
-                {
-                    b.HasOne("OnlineStore_Exam.Models.CategoryImage", "CategoryImage")
-                        .WithMany("Categories")
-                        .HasForeignKey("CategoryImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CategoryImage");
-                });
-
             modelBuilder.Entity("OnlineStore_Exam.Models.Images", b =>
                 {
+                    b.HasOne("OnlineStore_Exam.Models.Category", "Category")
+                        .WithOne("Image")
+                        .HasForeignKey("OnlineStore_Exam.Models.Images", "CategoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("OnlineStore_Exam.Models.Product", "Product")
                         .WithMany("Images")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Product");
                 });
@@ -208,17 +191,14 @@ namespace OnlineStore_Exam.Migrations
 
             modelBuilder.Entity("OnlineStore_Exam.Models.Category", b =>
                 {
+                    b.Navigation("Image");
+
                     b.Navigation("Products");
                 });
 
             modelBuilder.Entity("OnlineStore_Exam.Models.Product", b =>
                 {
                     b.Navigation("Images");
-                });
-
-            modelBuilder.Entity("OnlineStore_Exam.Models.CategoryImage", b =>
-                {
-                    b.Navigation("Categories");
                 });
 #pragma warning restore 612, 618
         }

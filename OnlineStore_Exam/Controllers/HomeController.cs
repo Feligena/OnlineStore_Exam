@@ -17,7 +17,7 @@ namespace OnlineStore_Exam.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_context.Categories.Include(x => x.CategoryImage));
+            return View();
         }
 
         public IActionResult About()

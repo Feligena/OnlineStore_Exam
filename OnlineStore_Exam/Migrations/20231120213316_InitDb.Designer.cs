@@ -11,15 +11,15 @@ using OnlineStore_Exam.Models;
 namespace OnlineStore_Exam.Migrations
 {
     [DbContext(typeof(OnlineStoreDbContext))]
-    [Migration("20231119212210_InitDB")]
-    partial class InitDB
+    [Migration("20231120213316_InitDb")]
+    partial class InitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.13")
+                .HasAnnotation("ProductVersion", "7.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);

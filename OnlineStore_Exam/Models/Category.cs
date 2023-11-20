@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace OnlineStore_Exam.Models
 {
@@ -10,8 +11,7 @@ namespace OnlineStore_Exam.Models
 
         public IEnumerable<Product> Products { get; set; }
 
-        public int CategoryImageId { get; set; }
-        public CategoryImage CategoryImage { get; set; }
+        public Images? Image { get; set; }
 
         public bool IsDeleted { get; set; } = false;
     }
