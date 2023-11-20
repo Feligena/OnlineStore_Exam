@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineStore_Exam.Models;
 using System.Diagnostics;
 
@@ -16,7 +17,7 @@ namespace OnlineStore_Exam.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Categories.Include(x => x.CategoryImage));
         }
 
         public IActionResult About()
@@ -34,9 +35,27 @@ namespace OnlineStore_Exam.Controllers
             return View();
         }
 
-        public IActionResult Search()
+        [HttpGet]
+        public IActionResult Search(string searchStr)
         {
+            if (!string.IsNullOrWhiteSpace(searchStr))
+            {
+                var posts = _context.Products.Include(x => x.Images)
+                                           .Include(x => x.Category)
+                                           .Where(x => x.Category == searchStr.Select(s => s.ToString()))
+                                           .Where(t => t.Title == searchStr);
+                return View(posts);
+            }
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult SearchByCategory(int id)
+        {
+            var posts = _context.Products.Include(x => x.Category).Where(p => p.CategoryId == id);
+            var category = _context.Categories.First(c => c.Id == id);
+            
+            return View(posts);
         }
 
         public IActionResult Basket()

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -17,6 +19,10 @@
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="~/css/fontawesome.min.css">
+
+    <!-- Load map styles -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+
     <!--END META TEMPLATE-->
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -24,32 +30,32 @@
 </head>
 <body>
     
-        <!-- Start Top Nav -->
-        <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
-            <div class="container text-light">
-                <div class="w-100 d-flex justify-content-between">
-                    <div>
-                        <i class="fa fa-envelope mx-2"></i>
-                        <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:info@company.com">info@company.com</a>
-                        <i class="fa fa-phone mx-2"></i>
-                        <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
-                    </div>
-                    <div>
-                        <a class="text-light" href="#" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
-                        <a class="text-light" href="#" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
-                        <a class="text-light" href="#" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
-                        <a class="text-light" href="#" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
-                    </div>
+    <!-- Start Top Nav -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
+        <div class="container text-light">
+            <div class="w-100 d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-envelope mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                    <i class="fa fa-phone mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                </div>
+                <div>
+                    <a class="text-light" href="https://www.facebook.com/?locale=ru_RU" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
         <!-- Close Top Nav -->
     <!-- Header -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light shadow">
             <div class="container d-flex justify-content-between align-items-center">
 
-                <a class="navbar-brand text-success logo h1 align-self-center" href="#">
+                <a class="navbar-brand text-success logo h1 align-self-center" asp-controller="Home" asp-action="Index">
                     <img src="~/my_img/logo_EFLAD.png" />
                 </a>
 
@@ -61,38 +67,39 @@
                     <div class="flex-fill">
                         <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="" asp-action="">Home</a>
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="" asp-action="">About</a>
+                                <a class="nav-link" asp-controller="Home" asp-action="About">About</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="" asp-action="">Shop</a>
+                                <a class="nav-link" asp-controller="Home" asp-action="Shop">Shop</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="" asp-action="">Contact</a>
+                                <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
                             </li>
                         </ul>
                     </div>
                     <div class="navbar align-self-center d-flex">
                         <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+                            <form asp-controller="Home" asp-action="Search" method="get" class="modal-content modal-body border-0 p-0">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                                    <input type="text" name="searchStr" class="form-control" id="inputMobileSearch" placeholder="Search ...">
                                 <div class="input-group-text">
                                     <i class="fa fa-fw fa-search"></i>
                                 </div>
                             </div>
+                            </form>
                         </div>
-                        <a class="nav-icon d-none d-lg-inline" asp-controller="" asp-action="" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                        <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                             <i class="fa fa-fw fa-search text-dark mr-2"></i>
                         </a>
-                        <a class="nav-icon position-relative text-decoration-none" asp-controller="" asp-action="">
+                        <a class="nav-icon position-relative text-decoration-none" asp-controller="Home" asp-action="Basket">
                             <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+                            @* <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span> *@
                         </a>
-                        <a class="nav-icon position-relative text-decoration-none" asp-controller="" asp-action="">
+                        <a class="nav-icon position-relative text-decoration-none" asp-controller="Home" asp-action="Login">
                             <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
                         </a>
                     </div>
                 </div>
@@ -101,6 +108,22 @@
         </nav>
     </header>
     <!-- Close Header -->
+    <!-- Modal -->
+    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="w-100 pt-1 mb-5 text-right">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-controller="Home" asp-action="Search" method="get" class="modal-content modal-body border-0 p-0">
+                <div class="input-group mb-2">
+                    <input type="text" name="searchStr" class="form-control" id="inputModalSearch" placeholder="Search ...">
+                    <button type="submit" class="input-group-text bg-success text-light">
+                        <i class="fa fa-fw fa-search text-white"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -114,7 +137,7 @@
             <div class="row">
 
                 <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Zay Shop</h2>
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">EFLAD</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
                             <i class="fas fa-map-marker-alt fa-fw"></i>
@@ -134,24 +157,21 @@
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" asp-controller="" asp-action="">Luxury</a></li>
-                        <li><a class="text-decoration-none" asp-controller="" asp-action="">Sport Wear</a></li>
-                        <li><a class="text-decoration-none" asp-controller="" asp-action="">Men's Shoes</a></li>
-                        <li><a class="text-decoration-none" asp-controller="" asp-action="">Women's Shoes</a></li>
-                        <li><a class="text-decoration-none" asp-controller="" asp-action="">Popular Dress</a></li>
-                        <li><a class="text-decoration-none" asp-controller="" asp-action="">Gym Accessories</a></li>
-                        <li><a class="text-decoration-none" asp-controller="" asp-action="">Sport Shoes</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="">Figures of people</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="">Animal figures</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="">Bushes for dioramas</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="">Desk lamp</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="">Decorative furniture</a></li>
                     </ul>
                 </div>
 
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" asp-controller="" asp-action="">Home</a></li>
-                        <li><a class="text-decoration-none" asp-controller="" asp-action="">About Us</a></li>
-                        <li><a class="text-decoration-none" asp-controller="" asp-action="">Shop Locations</a></li>
-                        <li><a class="text-decoration-none" asp-controller="" asp-action="">FAQs</a></li>
-                        <li><a class="text-decoration-none" asp-controller="" asp-action="">Contact</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="Home">Home</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="About">About Us</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="Shop">Shop Locations</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="Contact">Contact</a></li>
                     </ul>
                 </div>
 
@@ -177,13 +197,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-auto">
-                    <label class="sr-only" for="subscribeEmail">Email address</label>
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
-                        <div class="input-group-text btn-success text-light">Subscribe</div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -192,8 +205,8 @@
                 <div class="row pt-2">
                     <div class="col-12">
                         <p class="text-left text-light">
-                            Copyright &copy; 2021 Company Name
-                            | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
+                            Copyright &copy; 2023 Elizabeth Demekhina
+                            | Designed by <a rel="sponsored" href="#" target="_blank">TemplateMo</a>
                         </p>
                     </div>
                 </div>

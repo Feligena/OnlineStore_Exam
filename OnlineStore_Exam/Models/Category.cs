@@ -10,6 +10,9 @@ namespace OnlineStore_Exam.Models
 
         public IEnumerable<Product> Products { get; set; }
 
+        public int CategoryImageId { get; set; }
+        public CategoryImage CategoryImage { get; set; }
+
         public bool IsDeleted { get; set; } = false;
     }
 }
