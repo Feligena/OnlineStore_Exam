@@ -13,6 +13,7 @@ namespace OnlineStore_Exam.Controllers
             _context = context;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
