@@ -21,6 +21,7 @@ namespace OnlineStore_Exam.Models
         [Required, MaxLength(600)]
         public string Specification { get; set; }
 
+        [Display(Name ="Category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 

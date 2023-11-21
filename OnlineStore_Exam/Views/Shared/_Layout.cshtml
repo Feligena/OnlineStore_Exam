@@ -23,6 +23,10 @@
     <!-- Load map styles -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 
+    <!-- Slick -->
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
+
     <!--END META TEMPLATE-->
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -157,11 +161,11 @@
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="">Figures of people</a></li>
-                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="">Animal figures</a></li>
-                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="">Bushes for dioramas</a></li>
-                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="">Desk lamp</a></li>
-                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="">Decorative furniture</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="Search" asp-route-searchStr="peoples">Figures of people</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="Search" asp-route-searchStr="animals">Animal figures</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="Search" asp-route-searchStr="dioramas">Bushes for dioramas</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="Search" asp-route-searchStr="lamps">Desk lamps</a></li>
+                        <li><a class="text-decoration-none" asp-controller="Home" asp-action="Search" asp-route-searchStr="furnitures">Decorative furnitures</a></li>
                     </ul>
                 </div>
 

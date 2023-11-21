@@ -13,6 +13,8 @@ builder.Services.AddDbContext<OnlineStoreDbContext>(options =>
 
 var app = builder.Build();
 
+OnlineStoreDbInitialazer.Seed(app);
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

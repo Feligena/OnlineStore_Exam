@@ -18,12 +18,12 @@ namespace OnlineStore_Exam.Controllers
             _context = context;
         }
 
-        // GET: Products
-        //public async Task<IActionResult> Index()
-        //{
-        //    var onlineStoreDbContext = _context.Products.Include(p => p.Category);
-        //    return View(await onlineStoreDbContext.ToListAsync());
-        //}
+        //GET: Products
+        public async Task<IActionResult> IndexProduct()
+        {
+            var onlineStoreDbContext = _context.Products.Include(p => p.Category);
+            return View(await onlineStoreDbContext.ToListAsync());
+        }
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -47,7 +47,7 @@ namespace OnlineStore_Exam.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Title");
+            ViewBag.categories = new SelectList(_context.Categories, "Id", "Title");
             return View();
         }
 
@@ -62,7 +62,7 @@ namespace OnlineStore_Exam.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Title", product.CategoryId);
+            ViewBag.categories = new SelectList(_context.Categories, "Id", "Title", product.CategoryId);
             return View(product);
         }
 
