@@ -42,8 +42,7 @@ namespace OnlineStore_Exam.Controllers
             {
                 var posts = _context.Products.Include(x => x.Images)
                                            .Include(x => x.Category)
-                                           .Where(x => x.Category == searchStr.Select(s => s.ToString()))
-                                           .Where(t => t.Title == searchStr);
+                                           .Where(x => x.Title.Contains(searchStr));
                 return View(posts);
             }
             return View();
