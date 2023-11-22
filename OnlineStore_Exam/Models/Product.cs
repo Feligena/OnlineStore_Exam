@@ -28,5 +28,6 @@ namespace OnlineStore_Exam.Models
         public IEnumerable<Images> Images { get; set;}
         
         public bool IsDeleted { get; set; } = false;
+        public bool IsFavorites { get; set; } = false;
     }
 }
