@@ -21,11 +21,13 @@ namespace OnlineStore_Exam.Models
         [Required, MaxLength(600)]
         public string Specification { get; set; }
 
+        [Display(Name ="Category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
         public IEnumerable<Images> Images { get; set;}
         
         public bool IsDeleted { get; set; } = false;
+        public bool IsFavorites { get; set; } = false;
     }
 }

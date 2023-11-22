@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineStore_Exam.Models;
 using System.Diagnostics;
 
@@ -6,16 +7,18 @@ namespace OnlineStore_Exam.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly OnlineStoreDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(OnlineStoreDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+
+            return View(_context.Categories.Include(x => x.Image));
         }
 
         public IActionResult About()
@@ -33,9 +36,26 @@ namespace OnlineStore_Exam.Controllers
             return View();
         }
 
-        public IActionResult Search()
+        [HttpGet]
+        public IActionResult Search(string searchStr)
         {
+            if (!string.IsNullOrWhiteSpace(searchStr))
+            {
+                var posts = _context.Products.Include(x => x.Images)
+                                           .Include(x => x.Category)
+                                           .Where(x => x.Title.Contains(searchStr));
+                return View(posts);
+            }
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult SearchByCategory(int id)
+        {
+            var posts = _context.Products.Include(x => x.Category).Where(p => p.CategoryId == id);
+            var category = _context.Categories.First(c => c.Id == id);
+            
+            return View(posts);
         }
 
         public IActionResult Basket()

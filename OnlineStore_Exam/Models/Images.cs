@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineStore_Exam.Models
 {
@@ -14,6 +15,9 @@ namespace OnlineStore_Exam.Models
 
         public int ProductId {  get; set; }
         public Product Product { get; set; }
+
+        public int CategoryId { get; set; }
+        public Category Category { get; set; } = null!;
 
         public bool IsDeleted { get; set; } = false;
     }

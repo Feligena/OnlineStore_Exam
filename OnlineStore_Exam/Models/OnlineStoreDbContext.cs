@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
+using System.Drawing;
+using System.Reflection.Metadata;
 
 namespace OnlineStore_Exam.Models
 {
@@ -12,6 +15,15 @@ namespace OnlineStore_Exam.Models
         public OnlineStoreDbContext(DbContextOptions options) : base(options)
         {
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>()
+                        .HasOne(c => c.Image)
+                        .WithOne(c => c.Category)
+                        .HasForeignKey<Images>(c => c.CategoryId)
+                        .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
