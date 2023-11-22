@@ -18,13 +18,11 @@ namespace OnlineStore_Exam.Controllers
             _context = context;
         }
 
-        // GET: Users
-        //public async Task<IActionResult> Index()
-        //{
-        //      return _context.Users != null ? 
-        //                  View(await _context.Users.ToListAsync()) :
-        //                  Problem("Entity set 'OnlineStoreDbContext.Users'  is null.");
-        //}
+        //GET: Users
+        public async Task<IActionResult> PersonalArea()
+        {
+            return View();
+        }
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
