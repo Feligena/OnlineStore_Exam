@@ -22,9 +22,9 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         // GET: Admin/Categories
         public async Task<IActionResult> Index()
         {
-              return _context.Categories != null ? 
-                          View(await _context.Categories.ToListAsync()) :
-                          Problem("Entity set 'OnlineStoreDbContext.Categories'  is null.");
+            return _context.Categories != null ?
+                        View(await _context.Categories.ToListAsync()) :
+                        Problem("Entity set 'OnlineStoreDbContext.Categories'  is null.");
         }
 
         // GET: Admin/Categories/Details/5
@@ -56,7 +56,7 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,IsDeleted")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Title")] Category category)
         {
             if (ModelState.IsValid)
             {

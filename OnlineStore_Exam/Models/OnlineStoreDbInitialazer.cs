@@ -15,6 +15,7 @@ namespace OnlineStore_Exam.Models
                 context.Categories.Add(new Category { Title = "Diorams"});
                 context.Categories.Add(new Category { Title = "Figures"});
                 context.Categories.Add(new Category { Title = "Lamps"});
+                context.SaveChanges();
             }
         }
     }
