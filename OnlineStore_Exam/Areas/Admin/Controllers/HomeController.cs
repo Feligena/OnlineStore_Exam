@@ -9,5 +9,10 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public IActionResult Orders()
+        {
+            return View();
+        }
     }
 }

@@ -16,16 +16,15 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
- #wrapper {
+#wrapper {
     width: 100%;
-    background:#202020;
+    background: #1d242d;
 }
 
 #page-wrapper {
     padding: 15px 15px;
     min-height: 600px;
-    background:#F3F3F3;
-   
+    background: #e0e0e0;
 }
 #page-inner {
     width:100%;
@@ -39,7 +38,7 @@ body {
     text-align:center;
 }
 .no-boder {
-    border:1px solid #f3f3f3;
+    border: 1px solid #e0e0e0;
 }
 h2 {
     color: #f00;
@@ -63,8 +62,7 @@ p {
    DASHBOARD STYLES    
     =============================================*/
 .panel-back {
-    background-color:#F8F8F8;
-
+    background-color:#F3F3F3;
 }
    .noti-box {
 min-height: 100px;
@@ -206,16 +204,16 @@ max-width:170px;
 }
 
 .navbar-cls-top .navbar-brand {
-	color: #fff;
-background: #C90000;
-width: 260px;
-text-align: center;
-height: 60px;
-font-size: 30px;
-font-weight: 700;
+    color: #fff;
+    background: #59ab6e;
+    width: 260px;
+    text-align: center;
+    height: 60px;
+    font-size: 30px;
+    font-weight: 700;
 }
 .active-menu {
-    background-color:#C90000!important;
+    background-color: #59ab6e !important;
 }
 
 .arrow {
@@ -249,12 +247,11 @@ font-weight: 700;
 .sidebar-collapse .nav {
 	padding:0;
 }
-.sidebar-collapse .nav > li > a {
-	color:#fff;
-	background:#202020;
-	text-shadow:none;
-	
-}
+    .sidebar-collapse .nav > li > a {
+        color: #fff;
+        background: #1d242d;
+        text-shadow: none;
+    }
 .sidebar-collapse > .nav > li > a {
 	padding:15px 10px;
 }
@@ -300,31 +297,27 @@ font-weight: 700;
 	left:40px;
 }
 .navbar-side {
-	border:none;
-	background-color: #202020;
-	
+    border: none;
+    background-color: #1d242d;
 }
 .navbar-cls-top {
-	background:#4D4D4D;
-	border-bottom:none;
-	
+    background: #6a7380;
+    border-bottom: none;
 }
-.navbar-cls-top .navbar-brand:hover {
-
-background: #C90000;
-color:#fff;
-
-}
+    .navbar-cls-top .navbar-brand:hover {
+        background: #59ab6e;
+        color: #fff;
+    }
 
 .navbar-default {
 border:0px solid black;
      
 }
 .navbar-header {
-    background: #A70303;
+    background: #59ab6e;
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-background-color: #B40101;
+    background-color: #56ae6c;
 }
 .navbar-default .navbar-toggle {
 border-color: #fff;

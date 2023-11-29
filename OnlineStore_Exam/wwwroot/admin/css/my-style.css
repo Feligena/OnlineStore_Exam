@@ -1,0 +1,157 @@
+﻿body {
+}
+
+h4{
+    padding-top: 0;
+}
+
+h2 {
+    color: #59ab6e;
+    /*font-weight: 600;*/
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+.main-text{
+    font-size: 22px;
+    font-weight:600;
+}
+
+.div-header-page-text, .div-header-page-btn{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.div-header-page-btn{
+    float:right;
+}
+
+.div-header-page-text{
+    padding-left:50px;
+}
+
+#page-inner{
+    padding-left:20px;
+}
+
+#wrapper {
+    background: #1d242d;
+}
+
+.navbar-cls-top .navbar-brand {
+    color: #fff;
+    background: #59ab6e;
+}
+.active-menu {
+    background-color: #59ab6e !important;
+}
+
+.sidebar-collapse .nav > li > a {
+    color: #fff;
+    background: #1d242d;
+}
+
+.sidebar-collapse > .nav > li {
+	border-bottom: 1px solid rgba(107, 108, 109, 0.19);
+}
+.sidebar-collapse .nav > li > a:hover,
+.sidebar-collapse .nav > li > a:focus {
+	background:#0A0A0A;
+}
+
+.nav-second-level > li > a:before ,
+.nav-third-level > li > a:before {
+	background:#ff0000;
+}
+.nav-second-level > li > a:after,
+.nav-third-level > li > a:after {
+	background:#ff0000;
+}
+
+.navbar-side {
+    background-color: #1d242d;
+}
+.navbar-cls-top {
+    background: #58606b;
+}
+    .navbar-cls-top .navbar-brand:hover {
+        background: #59ab6e;
+        color: #fff;
+    }
+
+.navbar-default {
+border:0px solid black;
+     
+}
+.navbar-header {
+    background: #59ab6e;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: #56ae6c;
+}
+.navbar-default .navbar-toggle {
+border-color: #fff;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+background-color: #FFF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+.navbar-cls-top .navbar-brand {
+    color: #fff;
+    background: #59ab6e;
+}
+
+.active-menu {
+    background-color: #59ab6e !important;
+}
+
+.navbar-side {
+    border: none;
+    background-color: #1d242d;
+}
+
+.navbar-cls-top {
+    background: #4D4D4D;
+    border-bottom: none;
+}
+
+    .navbar-cls-top .navbar-brand:hover {
+        background: #59ab6e;
+        color: #fff;
+    }
+
+.navbar-default {
+    border: 0px solid black;
+}
+
+.navbar-header {
+    background: #59ab6e;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: #56ae6c;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #fff;
+}
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #FFF;
+    }*/
