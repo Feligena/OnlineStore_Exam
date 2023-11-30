@@ -7,7 +7,7 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction(nameof(Orders));
         }
 
         public IActionResult Orders()

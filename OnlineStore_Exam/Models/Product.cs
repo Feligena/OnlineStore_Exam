@@ -30,7 +30,7 @@ namespace OnlineStore_Exam.Models
         public int? PromotionId { get; set; }
         public Promotion? Promotion { get; set; }
 
-        public IEnumerable<Images>? Images { get; set;}
+        public IEnumerable<Images> Images { get; set;}
         
         public bool IsDeleted { get; set; } = false;
         public bool IsFavorites { get; set; } = false;

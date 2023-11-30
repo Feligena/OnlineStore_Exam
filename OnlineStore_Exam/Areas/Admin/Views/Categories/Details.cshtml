@@ -7,24 +7,40 @@
 
 <h2>Details: @Model.Title</h2>
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> 
-    <a class="text-muted" asp-action="Index">Back to List</a>
-</div>
+<section class="bg-light">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-lg-5 mt-5">
+                <div class="card mb-3 ">
+                    @* <img class="card-img img-fluid" src="/admin/img/find_user.png" alt="Card image cap" id="product-detail"> *@
+                    <img class="card-img img-fluid my-card-img" src="@Model.Image.Url" onerror="event.target.src='/admin/img/find_user.png'" alt="Card image cap" id="product-detail">
+                    
+                </div>
+            </div>
+            <!-- col end -->
+            <div class="col-lg-7 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h2">@Model.Title</h1>
+                        @if(Model.Products != null)
+                        {
+                            <h4>Products: </h4>
+                            <ul>
+                                @for(int i = 0; i < Model.Products.Count(); i++)
+                                {
+                                    <li>@Model.Products.ToList()[i].Title</li>
+                                }
+                            </ul>
+                        }
+                        <div>
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model?.Id">Delete</a>
+                            <a class="text-muted" asp-action="Index">Back to List</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

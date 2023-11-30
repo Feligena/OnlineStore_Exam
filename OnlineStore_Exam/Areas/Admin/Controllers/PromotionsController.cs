@@ -24,7 +24,7 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Promotions != null ? 
-                          View(await _context.Promotions.ToListAsync()) :
+                          View(await _context.Promotions.Where(p => p.IsDeleted == false).ToListAsync()) :
                           Problem("Entity set 'OnlineStoreDbContext.Promotions'  is null.");
         }
 
@@ -36,7 +36,7 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var promotion = await _context.Promotions
+            var promotion = await _context.Promotions.Include(p => p.Products)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (promotion == null)
             {
@@ -57,7 +57,7 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Details,Percent,StartDate,ExpirationDate,IsDeleted")] Promotion promotion)
+        public async Task<IActionResult> Create([Bind("Id,Title,Details,Percent,StartDate,ExpirationDate")] Promotion promotion)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Details,Percent,StartDate,ExpirationDate,IsDeleted")] Promotion promotion)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Details,Percent,StartDate,ExpirationDate")] Promotion promotion)
         {
             if (id != promotion.Id)
             {
@@ -149,7 +149,8 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
             var promotion = await _context.Promotions.FindAsync(id);
             if (promotion != null)
             {
-                _context.Promotions.Remove(promotion);
+                promotion.IsDeleted = true;
+                _context.Promotions.Update(promotion);
             }
             
             await _context.SaveChangesAsync();

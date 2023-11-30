@@ -5,7 +5,8 @@
         <div class="row">
             <div class="col-lg-5 mt-5">
                 <div class="card mb-3">
-                    <img class="card-img img-fluid" src="@Model.Images.ToList()[0]" alt="Card image cap" id="product-detail">
+                    <img class="card-img img-fluid" src="/admin/img/find_user.png" alt="Card image cap" id="product-detail">
+                    @* <img class="card-img img-fluid" src="@Model.Images.ToList()[0].Url" onerror="event.target.src='/admin/img/find_user.png'" alt="Card image cap" id="product-detail"> *@
                 </div>
                 <div class="row">
                     <!--Start Controls-->
@@ -16,6 +17,9 @@
                         </a>
                     </div>
                     <!--End Controls-->
+                    
+                    @if(Model.Images != null && Model.Images.Count() > 1)
+                    {
                     <!--Start Carousel Wrapper-->
                     <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
                         <!--Start Slides-->
@@ -24,11 +28,11 @@
                             <!--First slide-->
                             <div class="carousel-item active">
                                 <div class="row">
-                                    @for (int i = 1; i <= Model.Images.Count(); )
+                                    @for (int i = 1; i <= Model.Images.Count();)
                                     {
                                         <div class="col-4">
                                             <a href="#">
-                                                <img class="card-img img-fluid" src="@Model.Images.ToList()[i]" alt="Product Image">
+                                                <img class="card-img img-fluid" src="@Model.Images.ToList()[i].Url" alt="Product Image">
                                             </a>
                                         </div>
                                     }
@@ -39,6 +43,8 @@
                         <!--End Slides-->
                     </div>
                     <!--End Carousel Wrapper-->
+                    }
+                        
                     <!--Start Controls-->
                     <div class="col-1 align-self-center">
                         <a href="#multi-item-example" role="button" data-bs-slide="next">
@@ -53,16 +59,16 @@
             <div class="col-lg-7 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h1 class="h2">"@Model.Title</h1>
+                        <h1 class="h2">@Model.Title</h1>
                         <p class="h3 py-2">@Model.Prise p.</p>
 
-                        <h6>Art:</h6>
+                        <h4>Art:</h4>
                         <p>@Model.Article</p>
 
-                        <h6>Description:</h6>
+                        <h4>Description:</h4>
                         <p>@Model.Description</p>
 
-                        <h6>Specification:</h6>
+                        <h4>Specification:</h4>
                         <p>@Model.Specification</p>
 
                         <form asp-action="" method="GET">

@@ -7,9 +7,89 @@
 <h2>Details: @Model.Title</h2>
 
 <!-- Open Content -->
-<partial name="_CardProductPartial" model="@Model"></partial>
+<section class="bg-light">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-lg-5 mt-5">
+                <div class="card mb-3 ">
+                    @* <img class="card-img img-fluid" src="/admin/img/find_user.png" alt="Card image cap" id="product-detail"> *@
+                    <img class="card-img img-fluid my-card-img" src="@Model?.Images.ToList()[0].Url" onerror="event.target.src='/admin/img/find_user.png'" alt="Card image cap" id="product-detail">
+                </div>
+                
+                @if (Model.Images != null && Model.Images.Count() > 1)
+                {
+                <div class="row">
+                    <!--Start Controls-->
+                    <div class="col-1 align-self-center">
+                        <a href="#multi-item-example" role="button" data-bs-slide="prev">
+                            <i class="text-dark fas fa-chevron-left"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </div>
+                    <!--End Controls-->
+                    <!--Start Carousel Wrapper-->
+                    <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
+                        <!--Start Slides-->
+                        <div class="carousel-inner product-links-wap" role="listbox">
 
-<div>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a class="text-muted" asp-action="Index">Back to List</a>
-</div>
+                            <!--First slide-->
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    @for (int i = 1; i <= Model.Images.Count();)
+                                    {
+                                        <div class="col-4">
+                                            <a href="#">
+                                                <img class="card-img img-fluid" src="@Model.Images.ToList()[i].Url" alt="Product Image">
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <!--/.First slide-->
+                        </div>
+                        <!--End Slides-->
+                    </div>
+                    <!--End Carousel Wrapper-->
+                    <!--Start Controls-->
+                    <div class="col-1 align-self-center">
+                        <a href="#multi-item-example" role="button" data-bs-slide="next">
+                            <i class="text-dark fas fa-chevron-right"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    <!--End Controls-->
+                </div>
+                }
+                    
+            </div>
+            <!-- col end -->
+            <div class="col-lg-7 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h2">@Model.Title</h1>
+                        <p class="h3 py-2">@Model.Prise p.</p>
+
+                        <h4>Art:</h4>
+                        <p>@Model.Article</p>
+
+                        <h4>Description:</h4>
+                        <p>@Model.Description</p>
+
+                        <h4>Specification:</h4>
+                        <p>@Model.Specification</p>
+
+                        <div>
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> 
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model?.Id">Delete</a>
+                            <a class="text-muted" asp-action="Index">Back to List</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Close Content -->
+
+
