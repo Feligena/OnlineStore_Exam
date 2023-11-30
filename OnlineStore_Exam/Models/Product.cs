@@ -24,13 +24,13 @@ namespace OnlineStore_Exam.Models
 
         [Display(Name ="Category")]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
         [Display(Name = "Promotion")]
         public int? PromotionId { get; set; }
         public Promotion? Promotion { get; set; }
 
-        public IEnumerable<Images> Images { get; set;}
+        public IEnumerable<Images>? Images { get; set;}
         
         public bool IsDeleted { get; set; } = false;
         public bool IsFavorites { get; set; } = false;

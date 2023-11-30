@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using NuGet.Packaging;
+using OnlineStore_Exam.Areas.Admin.Helpers;
 using OnlineStore_Exam.Models;
 
 namespace OnlineStore_Exam.Areas.Admin.Controllers
@@ -53,16 +56,28 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         }
 
         // POST: Admin/Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Article,Title,Prise,Description,Specification,CategoryId,IsDeleted,IsFavorites")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Article,Title,Prise,Description,Specification,CategoryId")] Product product, IFormFile ImageUrl)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
+
+                if(ImageUrl != null)
+                {
+                    var images = new Images
+                    {
+                        Name = ImageUrl.Name,
+                        Url = await FileUploadHelper.UploadAsync(ImageUrl),
+                        ProductId = product.Id
+                    };
+                    await _context.Images.AddAsync(images);
+                    await _context.SaveChangesAsync();
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Title", product.CategoryId);
@@ -87,11 +102,9 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         }
 
         // POST: Admin/Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Article,Title,Prise,Description,Specification,CategoryId,IsDeleted,IsFavorites")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Article,Title,Prise,Description,Specification,CategoryId")] Product product, IFormFile ImageUrl)
         {
             if (id != product.Id)
             {
@@ -104,6 +117,18 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
                 {
                     _context.Update(product);
                     await _context.SaveChangesAsync();
+
+                    if (ImageUrl != null)
+                    {
+                        var images = new Images
+                        {
+                            Name = ImageUrl.Name,
+                            Url = await FileUploadHelper.UploadAsync(ImageUrl),
+                            ProductId = product.Id
+                        };
+                        _context.Images.Update(images);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
