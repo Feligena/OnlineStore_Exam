@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using OnlineStore_Exam.Areas.Admin.Models;
 using System.Drawing;
 using System.Reflection.Metadata;
 
@@ -11,6 +12,7 @@ namespace OnlineStore_Exam.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Images> Images { get; set; }
+        public DbSet<Promotion> Promotions { get; set; }
 
         public OnlineStoreDbContext(DbContextOptions options) : base(options)
         {

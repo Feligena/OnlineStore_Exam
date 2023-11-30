@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace OnlineStore_Exam.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly OnlineStoreDbContext _context;

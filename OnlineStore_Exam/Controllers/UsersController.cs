@@ -18,6 +18,14 @@ namespace OnlineStore_Exam.Controllers
             _context = context;
         }
 
+        // GET: Users
+        public async Task<IActionResult> Index()
+        {
+            return _context.Users != null ?
+                        View(await _context.Users.ToListAsync()) :
+                        Problem("Entity set 'OnlineStoreDbContext.Categories'  is null.");
+        }
+
         //GET: Users
         public async Task<IActionResult> PersonalArea()
         {
