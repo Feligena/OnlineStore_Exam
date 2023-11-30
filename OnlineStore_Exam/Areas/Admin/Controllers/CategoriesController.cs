@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using OnlineStore_Exam.Areas.Admin.Helpers;
 using OnlineStore_Exam.Models;
 
 namespace OnlineStore_Exam.Areas.Admin.Controllers
@@ -52,16 +53,26 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         }
 
         // POST: Admin/Categories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Title")] Category category, IFormFile ImageUrl)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
+                await _context.AddAsync(category);
                 await _context.SaveChangesAsync();
+
+                if (ImageUrl != null)
+                {
+                    var images = new Images
+                    {
+                        Name = ImageUrl.Name,
+                        Url = await FileUploadHelper.UploadAsync(ImageUrl),
+                        CategoryId = category.Id
+                    };
+                    await _context.Images.AddAsync(images);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -84,11 +95,9 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         }
 
         // POST: Admin/Categories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,IsDeleted")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,IsDeleted")] Category category, IFormFile ImageUrl)
         {
             if (id != category.Id)
             {
@@ -101,6 +110,18 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
                 {
                     _context.Update(category);
                     await _context.SaveChangesAsync();
+
+                    if (ImageUrl != null)
+                    {
+                        var images = new Images
+                        {
+                            Name = ImageUrl.Name,
+                            Url = await FileUploadHelper.UploadAsync(ImageUrl),
+                            CategoryId = category.Id
+                        };
+                        await _context.Images.AddAsync(images);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
