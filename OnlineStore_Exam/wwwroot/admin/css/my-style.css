@@ -97,8 +97,10 @@ border-color: #fff;
 background-color: #FFF;
 }
 
-
-
+.my-card-img {
+    height: 100px;
+    width: 200px;
+}
 
 
 

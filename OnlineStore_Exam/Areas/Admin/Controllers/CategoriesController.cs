@@ -24,7 +24,7 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             return _context.Categories != null ?
-                        View(await _context.Categories.ToListAsync()) :
+                        View(await _context.Categories.Where(x => x.IsDeleted == false).Include(x => x.Products).Include(x => x.Image).ToListAsync()) :
                         Problem("Entity set 'OnlineStoreDbContext.Categories'  is null.");
         }
 
@@ -36,7 +36,7 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories
+            var category = await _context.Categories.Include(x => x.Products).Include(x => x.Image)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
@@ -97,7 +97,7 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         // POST: Admin/Categories/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,IsDeleted")] Category category, IFormFile ImageUrl)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title")] Category category, IFormFile ImageUrl)
         {
             if (id != category.Id)
             {
@@ -169,7 +169,8 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
             var category = await _context.Categories.FindAsync(id);
             if (category != null)
             {
-                _context.Categories.Remove(category);
+                category.IsDeleted = true;
+                _context.Categories.Update(category);
             }
             
             await _context.SaveChangesAsync();

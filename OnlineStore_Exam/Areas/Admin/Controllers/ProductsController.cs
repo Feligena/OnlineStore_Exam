@@ -25,7 +25,7 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
         // GET: Admin/Products
         public async Task<IActionResult> Index()
         {
-            var onlineStoreDbContext = _context.Products.Include(p => p.Category);
+            var onlineStoreDbContext = _context.Products.Include(p => p.Category).Include(p => p.Images).Where(p => p.IsDeleted == false);
             return View(await onlineStoreDbContext.ToListAsync());
         }
 
@@ -39,6 +39,7 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
 
             var product = await _context.Products
                 .Include(p => p.Category)
+                .Include(p => p.Images)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
@@ -178,7 +179,8 @@ namespace OnlineStore_Exam.Areas.Admin.Controllers
             var product = await _context.Products.FindAsync(id);
             if (product != null)
             {
-                _context.Products.Remove(product);
+                product.IsDeleted = true;
+                _context.Products.Update(product);
             }
             
             await _context.SaveChangesAsync();

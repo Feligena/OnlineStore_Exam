@@ -5,31 +5,32 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Index</h1>
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-6 div-header-page-text">
+        <h2>Promotion</h2>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6 div-header-page-btn">
+        <a class="btn btn-info btn-lg" asp-action="Create">Create New</a>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class ="main-text">
                 @Html.DisplayNameFor(model => model.Title)
             </th>
-            <th>
+            <th class="main-text">
                 @Html.DisplayNameFor(model => model.Details)
             </th>
-            <th>
+            <th class="main-text">
                 @Html.DisplayNameFor(model => model.Percent)
             </th>
-            <th>
+            <th class="main-text">
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
-            <th>
+            <th class="main-text">
                 @Html.DisplayNameFor(model => model.ExpirationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsDeleted)
             </th>
             <th></th>
         </tr>
@@ -38,27 +39,24 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                    <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Details)
+                    <h4>@Html.DisplayFor(modelItem => item.Details)</h4>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Percent)
+                    <h4>@Html.DisplayFor(modelItem => item.Percent)</h4>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
+                    <h4>@Html.DisplayFor(modelItem => item.StartDate)</h4>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ExpirationDate)
+                    <h4>@Html.DisplayFor(modelItem => item.ExpirationDate)</h4>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                <a class="btn btn-success" asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
