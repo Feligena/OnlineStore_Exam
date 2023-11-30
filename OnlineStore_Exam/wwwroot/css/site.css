@@ -25,3 +25,8 @@ body {
     height: 350px;
     /*height: 40vh;*/
 }
+
+.content-centre{
+    display: flex;
+    justify-content: center;
+}
